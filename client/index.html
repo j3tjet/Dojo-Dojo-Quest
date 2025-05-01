@@ -3,18 +3,111 @@
 <html>
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-    <style>
-    </style>
+    <style></style>
   </head>
 
   <body>
     <h1>Spawn and move</h1>
 
+    <button id="controller-button">Connect</button>
+
+    <div>
+      <div id="position-display" class="display">Position: (0, 0)</div>
+      <div id="moves-display" class="display">Moves remaining: 0</div>
+
+      <button id="spawn-button" disabled>Spawn</button>
+      <div>
+        <button id="up-button" disabled>Up</button>
+        <button id="down-button" disabled>Down</button>
+        <button id="left-button" disabled>Left</button>
+        <button id="right-button" disabled>Right</button>
+      </div>
+    </div>
+
     <script type="module">
       import init, { ToriiClient } from './pkg/dojo_c.js';
+      import { initGame, updateFromEntityData } from './game.js';
+      import controllerOpts from './controller.js';
+      import Controller from '@cartridge/controller';
+      import manifest from '../contracts/manifest_dev.json' assert { type: 'json' };
 
       await init();
 
+      async function run(account) {
+        let config = {
+          toriiUrl: 'http://localhost:8080',
+          relayUrl: '',
+          worldAddress: manifest.world.address,
+        };
+
+        const torii = await new ToriiClient(config);
+
+        initGame(account, manifest);
+
+        const query = {
+          pagination: {
+            limit: 10,
+            cursor: undefined,
+            direction: 'Forward',
+            order_by: [],
+          },
+          clause: undefined,
+          no_hashed_keys: false,
+          models: [],
+          historical: false,
+        };
+
+        let entities = await torii.getEntities(query);
+        console.log(entities);
+
+        if (entities.items.length > 0) {
+          entities.items.forEach((entity) => {
+            updateFromEntityData(entity);
+          });
+        }
+
+        const subscription = await torii.onEntityUpdated(
+          {
+            Keys: {
+              keys: [undefined],
+              pattern_matching: 'VariableLen',
+              models: [],
+            },
+          },
+          (entities) => {
+            console.log(entities);
+            updateFromEntityData(entities);
+          },
+        );
+
+        // Keeps the subscription alive
+        window.addEventListener('beforeunload', () => {
+          if (subscription) {
+            subscription.cancel();
+          }
+        });
+      }
+
+      const controller = new Controller(controllerOpts);
+
+      document.getElementById('controller-button').onclick = async () => {
+        try {
+          let account = await controller.connect();
+
+          document.getElementById('controller-button').textContent = 'Connected';
+          document.getElementById('controller-button').style.backgroundColor = '#4CAF50';
+
+          document.getElementById('spawn-button').disabled = false;
+
+          run(account).catch((error) => {
+            console.error(error);
+          });
+        } catch (error) {
+          console.error('Failed to connect:', error);
+          document.getElementById('controller-button').textContent = 'Connection Failed';
+          document.getElementById('controller-button').style.backgroundColor = '#f44336';
+        }
+      };
     </script>
   </body>
 </html>
