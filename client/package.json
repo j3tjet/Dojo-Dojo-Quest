@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite dev",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.4",
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "vite": "^6.3.4",
+    "vite-plugin-mkcert": "^1.17.8"
+  },
+  "dependencies": {
+    "@cartridge/controller": "^0.7.12",
+    "starknet": "^6.24.1"
+  }
+}
