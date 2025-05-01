@@ -67,3 +67,17 @@ Heads to the `client` directory and do:
 pnpm install
 pnpm run dev
 ```
+
+## Working with Dojo toolchain
+
+Katana is a starknet sequencer that is optimized for performance and low latency, but can also be used as a local development node.
+
+Torii is the automatic indexer for Dojo, it will index the state of the contracts and make it available to the client.
+
+```bash
+# Start Katana
+katana --config contracts/katana.toml
+
+# Start Torii
+torii --config contracts/torii_dev.toml
+```
