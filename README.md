@@ -43,6 +43,12 @@ asdf install scarb 2.10.1
 asdf set -u scarb 2.10.1
 ```
 
+To run Katana, in some cases, you may need to use `brew` to install the following:
+
+```bash
+brew install llvm@19 --quiet
+```
+
 ## Contracts
 
 To work on the contracts, change directory to `contracts` and do:
