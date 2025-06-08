@@ -7,6 +7,7 @@
 import manifest from '../contracts/manifest_dev.json' assert { type: 'json' };
 
 const actionsContract = manifest.contracts.find((contract) => contract.tag === 'di-actions');
+const VRF_PROVIDER_ADDRESS = '0x15f542e25a4ce31481f986888c179b6e57412be340b8095f72f75a328fbb27b';
 
 const controllerOpts = {
   chains: [{ rpcUrl: 'http://localhost:5050' }],
@@ -28,7 +29,15 @@ const controllerOpts = {
             entrypoint: 'move',
             description: 'Move the player in the game',
           },
+          {
+            name: 'Move Random',
+            entrypoint: 'move_random',
+            description: 'Move the player in the game',
+          },
         ],
+      },
+      [VRF_PROVIDER_ADDRESS]: {
+        methods: [{ entrypoint: "request_random" }],
       },
     },
   },
