@@ -3,16 +3,16 @@ version = 1
 
 [[package]]
 name = "dojo"
-version = "1.6.2"
-source = "git+https://github.com/dojoengine/dojo?tag=v1.6.2#d6e847c51ecd0121a43c2a17b96dbca936604764"
+version = "1.6.0-alpha.1"
+source = "git+https://github.com/dojoengine/dojo?tag=v1.7.0-alpha.1#67aeb9f49c6b8c30b1850badd065c9192617c3b2"
 dependencies = [
- "dojo_plugin",
+ "dojo_macros",
 ]
 
 [[package]]
 name = "dojo_cairo_test"
-version = "1.6.2"
-source = "git+https://github.com/dojoengine/dojo?tag=v1.6.2#d6e847c51ecd0121a43c2a17b96dbca936604764"
+version = "1.6.0-alpha.1"
+source = "git+https://github.com/dojoengine/dojo?tag=v1.7.0-alpha.1#67aeb9f49c6b8c30b1850badd065c9192617c3b2"
 dependencies = [
  "dojo",
 ]
@@ -23,9 +23,10 @@ version = "1.7.0"
 dependencies = [
  "dojo",
  "dojo_cairo_test",
+ "dojo_macros",
 ]
 
 [[package]]
-name = "dojo_plugin"
-version = "2.10.1"
-source = "git+https://github.com/dojoengine/dojo?tag=v1.6.2#d6e847c51ecd0121a43c2a17b96dbca936604764"
+name = "dojo_macros"
+version = "1.6.0-alpha.1"
+source = "git+https://github.com/dojoengine/dojo?tag=v1.7.0-alpha.1#67aeb9f49c6b8c30b1850badd065c9192617c3b2"

@@ -10,7 +10,7 @@ default = "di"
 rpc_url = "http://localhost:5050/"
 account_address = "0x127fd5f1fe78a71f8bcd1fec63e3fe2f0486b6ecd5c86a0466c3a21fa5cfcec"
 private_key = "0xc5b2fcab997346f3ea1c00b002ecf6f382c5f9c9659a3894eb783c5320f912"
-world_address = "0x06f46cd4ca0094a9637abf0470af31a16a9dfadd3b3f83b9a7d5e2e2addbdd02"
+world_address = "0x054f5e7c071d9fb12d9fa19e71555965d7e71a64782a86ff35cdd8cb25277ad1"
 
 [writers]
 "di" = ["di-actions"]

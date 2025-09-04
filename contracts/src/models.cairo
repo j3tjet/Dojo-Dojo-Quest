@@ -1,9 +1,10 @@
 use starknet::ContractAddress;
 use core::num::traits::{SaturatingAdd, SaturatingSub};
 
-#[derive(Serde, Copy, Drop, Introspect)]
+#[derive(Serde, Copy, Drop, Default, Introspect)]
 pub enum Direction {
     // Serialized as 0.
+    #[default]
     Left,
     // Serialized as 1.
     Right,
