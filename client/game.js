@@ -6,19 +6,25 @@
  */
 
 const ACTION_CONTRACT = 'di-actions';
-const POSITION_MODEL = 'di-Position';
-const MOVES_MODEL = 'di-Moves';
+
+const NAMESPACE = 'di';
+const POSITION = 'Position';
+const MOVES = 'Moves';
+
+function updateFromEntitiesData(entities) {
+  entities.forEach((entity) => { updateFromEntityData(entity); });
+}
 
 function updateFromEntityData(entity) {
   if (entity.models) {
-    if (entity.models[POSITION_MODEL]) {
-      const position = entity.models[POSITION_MODEL];
-      updatePositionDisplay(position.x.value, position.y.value);
+    if (entity.models[NAMESPACE][POSITION]) {
+      const position = entity.models[NAMESPACE][POSITION];
+      updatePositionDisplay(position.x, position.y);
     }
 
-    if (entity.models[MOVES_MODEL]) {
-      const remaining = entity.models[MOVES_MODEL].remaining.value;
-      updateMovesDisplay(remaining);
+    if (entity.models[NAMESPACE][MOVES]) {
+      const moves = entity.models[NAMESPACE][MOVES];
+      updateMovesDisplay(moves.remaining);
     }
   }
 }
@@ -130,4 +136,4 @@ async function moveRandom(account, manifest) {
   console.log('Transaction sent:', tx);
 }
 
-export { initGame, updateFromEntityData };
+export { initGame, updateFromEntitiesData };
