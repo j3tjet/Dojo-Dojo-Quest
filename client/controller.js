@@ -37,7 +37,7 @@ const controllerOpts = {
         ],
       },
       [VRF_PROVIDER_ADDRESS]: {
-        methods: [{ entrypoint: "request_random" }],
+        methods: [{ entrypoint: 'request_random' }],
       },
     },
   },

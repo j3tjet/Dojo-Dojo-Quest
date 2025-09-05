@@ -5,25 +5,27 @@
  * Sends transactions to the chain using controller account.
  */
 
-const ACTION_CONTRACT = 'di-actions';
-
 const NAMESPACE = 'di';
-const POSITION = 'Position';
-const MOVES = 'Moves';
+const POSITION_MODEL = 'Position';
+const MOVES_MODEL = 'Moves';
+
+const ACTIONS_CONTRACT = 'di-actions';
 
 function updateFromEntitiesData(entities) {
-  entities.forEach((entity) => { updateFromEntityData(entity); });
+  entities.forEach((entity) => {
+    updateFromEntityData(entity);
+  });
 }
 
 function updateFromEntityData(entity) {
   if (entity.models) {
-    if (entity.models[NAMESPACE][POSITION]) {
-      const position = entity.models[NAMESPACE][POSITION];
+    if (entity.models[NAMESPACE][POSITION_MODEL]) {
+      const position = entity.models[NAMESPACE][POSITION_MODEL];
       updatePositionDisplay(position.x, position.y);
     }
 
-    if (entity.models[NAMESPACE][MOVES]) {
-      const moves = entity.models[NAMESPACE][MOVES];
+    if (entity.models[NAMESPACE][MOVES_MODEL]) {
+      const moves = entity.models[NAMESPACE][MOVES_MODEL];
       updateMovesDisplay(moves.remaining);
     }
   }
@@ -73,7 +75,7 @@ function initGame(account, manifest) {
 
 async function spawn(account, manifest) {
   const tx = await account.execute({
-    contractAddress: manifest.contracts.find((contract) => contract.tag === ACTION_CONTRACT)
+    contractAddress: manifest.contracts.find((contract) => contract.tag === ACTIONS_CONTRACT)
       .address,
     entrypoint: 'spawn',
     calldata: [],
@@ -103,7 +105,7 @@ async function move(account, manifest, direction) {
   }
 
   const tx = await account.execute({
-    contractAddress: manifest.contracts.find((contract) => contract.tag === ACTION_CONTRACT)
+    contractAddress: manifest.contracts.find((contract) => contract.tag === ACTIONS_CONTRACT)
       .address,
     entrypoint: 'move',
     calldata: calldata,
@@ -117,8 +119,9 @@ const VRF_PROVIDER_ADDRESS = '0x15f542e25a4ce31481f986888c179b6e57412be340b8095f
 // VRF -> we need to sandwitch the `consume_random` as defined here:
 // https://docs.cartridge.gg/vrf/overview#executing-vrf-transactions
 async function moveRandom(account, manifest) {
-
-  let action_addr = manifest.contracts.find((contract) => contract.tag === ACTION_CONTRACT).address;
+  let action_addr = manifest.contracts.find(
+    (contract) => contract.tag === ACTIONS_CONTRACT,
+  ).address;
 
   const tx = await account.execute([
     {
@@ -130,7 +133,7 @@ async function moveRandom(account, manifest) {
       contractAddress: action_addr,
       entrypoint: 'move_random',
       calldata: [],
-    }
+    },
   ]);
 
   console.log('Transaction sent:', tx);

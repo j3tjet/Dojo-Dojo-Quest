@@ -26,24 +26,26 @@
     </div>
 
     <script type="module">
-      import { init, ToriiQueryBuilder, KeysClause } from "@dojoengine/sdk";
-      import { initGame, updateFromEntitiesData } from './game.js';
-      import controllerOpts from './controller.js';
       import Controller from '@cartridge/controller';
+      import { init, ToriiQueryBuilder, KeysClause } from '@dojoengine/sdk';
+
+      import controllerOpts from './controller.js';
+      import { initGame, updateFromEntitiesData } from './game.js';
+
       import manifest from '../contracts/manifest_dev.json' assert { type: 'json' };
 
       const DOMAIN_SEPERATOR = {
-        name: "dojo-intro",
-        version: "1.0",
-        chainId: "KATANA",
-        revision: "1",
-      }
+        name: 'dojo-intro',
+        version: '1.0',
+        chainId: 'KATANA',
+        revision: '1',
+      };
 
       async function run(account) {
         const torii = await init({
           client: {
             worldAddress: manifest.world.address,
-            toriiUrl: "http://localhost:8080",
+            toriiUrl: 'http://localhost:8080',
           },
           domain: DOMAIN_SEPERATOR,
         });
@@ -52,10 +54,8 @@
 
         // Subscribe to model updates
         const [_, subscription] = await torii.subscribeEntityQuery({
-          query: new ToriiQueryBuilder()
-            .withClause(
-              KeysClause(["di-Position", "di-Moves"], [account.address], "FixedLen")
-                .build()
+          query: new ToriiQueryBuilder().withClause(
+            KeysClause(['di-Position', 'di-Moves'], [account.address], 'FixedLen').build(),
           ),
           callback: ({ data, error }) => {
             if (data) {
@@ -64,7 +64,7 @@
             if (error) {
               console.error(error);
             }
-          }
+          },
         });
 
         // Unsubscribe on window exit
