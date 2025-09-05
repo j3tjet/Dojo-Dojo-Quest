@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.15.1",
   "dependencies": {
     "@cartridge/controller": "^0.10.0",
     "@dojoengine/core": "1.7.0-preview.3",
@@ -19,8 +19,8 @@
     "starknet": "^8.5.2"
   },
   "devDependencies": {
-    "prettier": "^3.5.3",
-    "vite": "^6.3.4",
+    "prettier": "^3.6.2",
+    "vite": "^7.1.4",
     "vite-plugin-mkcert": "^1.17.8",
     "vite-plugin-wasm": "^3.5.0"
   }
