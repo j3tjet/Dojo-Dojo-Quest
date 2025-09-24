@@ -12,10 +12,10 @@
   "license": "ISC",
   "packageManager": "pnpm@10.15.1",
   "dependencies": {
-    "@cartridge/controller": "^0.10.0",
-    "@dojoengine/core": "1.7.0-preview.3",
-    "@dojoengine/sdk": "^1.7.0-preview.3",
-    "@dojoengine/torii-client": "1.7.0-preview.3",
+    "@cartridge/controller": "^0.10.5",
+    "@dojoengine/core": "1.7.1",
+    "@dojoengine/sdk": "^1.7.2",
+    "@dojoengine/torii-client": "1.7.2",
     "starknet": "^8.5.2"
   },
   "devDependencies": {

@@ -49,3 +49,5 @@ pnpm run dev
 
 You should be all set to play the game!
 Navigate to your browser and start clicking away.
+
+Currently, the best browser to test locally with Controller is Google Chrome.
