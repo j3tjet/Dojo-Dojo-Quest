@@ -1,53 +1,70 @@
-# Dojo intro
+# 🕹️ Dojo Quest
 
-This repository contains a (very) simple [Dojo](https://book.dojoengine.org/) game.
-The goal is to showcase how Dojo works and ease the developement for on-chain applications and games.
+Dojo Quest es un prototipo sencillo de videojuego **on-chain**, construido con [Dojo Engine](https://dojoengine.org/overview).  
+El objetivo es aparecer en un mapa (*spawn*), moverse con un número limitado de pasos y encontrar un tesoro escondido.  
 
-The game is built in two parts:
+Este proyecto acompaña el artículo **"Los Pilares de Dojo, creemos un mundo on-chain"**, donde mostramos cómo Dojo transforma la manera en que se construyen aplicaciones y mundos digitales.
 
-- `contracts`: The Dojo contracts deployed on Starknet.
-- `client`: The client application that interacts with the contracts (and read data using Torii).
+---
 
-## Setup environment
+## 🚀 Características
 
-To work with Dojo, install the toolchain using `asdf`:
+- Arquitectura **Entity-Component-System (ECS)** sobre Dojo.  
+- Interfaz web en **HTML + JavaScript** con [Cartridge Controller](https://docs.cartridge.gg/controller/getting-started).  
+- Backend en **Cairo** con modelos (`Position`, `Moves`) y acciones (`spawn`, `move`).  
+- Sin servidores centralizados: el estado del juego vive en la cadena.  
+- Transparencia total: los movimientos son verificables y el estado es compartido.  
 
-```bash
-curl -L https://raw.githubusercontent.com/dojoengine/dojo/main/dojoup/asdf-install | bash
-```
+---
 
-## Deploy contracts
+## 📂 Estructura del Proyecto
 
-A simple "spawn and move" game letting you generate a character and move them around a board.
+```plaintext
+.
+├── contracts/         # Modelos y sistemas en Cairo (Dojo ECS)
+│   ├── models.cairo
+│   └── actions.cairo
+├── public/            # Interfaz web
+│   ├── index.html
+│   ├── game.js
+│   ├── controller.js
+│   └── assets/        # Sprites (personaje, mapa, tesoro)
+├── manifest_dev.json  # Manifest generado por Dojo
+└── README.md
 
-To set up your local blockchain environment, change directory to `contracts` and do:
+## 🛠️ Requisitos
 
-```bash
-# (Tab 1) Start the Katana sequencer
-katana --config katana.toml
+- Node.js ≥ 18
+- [Dojo Engine](https://dojoengine.org/)
+- Katana (devnet local)
+- Sozo (CLI de Dojo)
 
-# (Tab 2) Build and deploy the contracts
-sozo build && sozo migrate
+---
 
-# (Tab 3) Start the Torii indexer
-torii --config torii_dev.toml
-```
+## ⚡ Instalación y Uso
 
-## Run client
+1. **Clona el repositorio**
+   ```bash
+   git clone https://github.com/tu-usuario/dojo-quest.git
+   cd dojo-quest
 
-A simple vite project (no React), configured to use `https` (necessary for the [Cartridge controller](https://docs.cartridge.gg/controller/overview)).
+2. **Instala dependencias**
+   ```bash
+   npm install
 
-Head to the `client` directory and run:
+3. **Inicia Katana (red local de pruebas)**
+   ```bash
+   katana --config katana.toml
 
-```bash
-# Install dependencies
-pnpm install
+4. **Despliega los contratos con Sozo**
+   ```bash
+   sozo build && sozo migrate
 
-# Run the client locally
-pnpm run dev
-```
+5. **Inicia Torii (indexador de estado)**
+   ```bash
+   torii --config torii.toml
 
-You should be all set to play the game!
-Navigate to your browser and start clicking away.
-
-Currently, the best browser to test locally with Controller is Google Chrome.
+5. **Ejecuta la interfaz web**
+   ```bash
+   pnpm run dev
+# Dojo-Dojo-Quest
