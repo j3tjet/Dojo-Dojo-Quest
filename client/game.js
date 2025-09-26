@@ -10,6 +10,10 @@ const POSITION_MODEL = 'Position';
 const MOVES_MODEL = 'Moves';
 
 const ACTIONS_CONTRACT = 'di-actions';
+const tileSize = 40;
+let currentAccount = null;
+let currentManifest = null;
+
 
 function updateFromEntitiesData(entities) {
   entities.forEach((entity) => {
@@ -36,6 +40,36 @@ function updatePositionDisplay(x, y) {
   if (positionDisplay) {
     positionDisplay.textContent = `Position: (${x}, ${y})`;
   }
+  const player = document.getElementById('player');
+  if (player) {
+    const tileSize = 40; 
+    player.style.left = `${x * tileSize}px`;
+    player.style.top = `${y * tileSize}px`;
+  }
+
+  const goalX = 5;
+  const goalY = 5;
+  const goal = document.getElementById('goal');
+  if (goal) {
+    goal.style.left = `${goalX * tileSize}px`;
+    goal.style.top = `${goalY * tileSize}px`;
+  }
+
+  if (x === goalX && y === goalY) {
+    const msg = document.getElementById('message');
+    if (msg) {
+      msg.textContent = "¡Encontraste el tesoro!";
+    }
+
+    if (goal) {
+      goal.style.display = 'none';
+    }
+    if (currentAccount && currentManifest) {
+    spawn(currentAccount, currentManifest)
+      .then(() => alert("ganaste"))
+      .catch(err => console.error("Error al respawnear:", err));
+  }
+  }
 }
 
 function updateMovesDisplay(remaining) {
@@ -46,17 +80,23 @@ function updateMovesDisplay(remaining) {
 }
 
 function initGame(account, manifest) {
+  currentAccount = account;
+currentManifest = manifest;
   document.getElementById('up-button').onclick = async () => {
     await move(account, manifest, 'up');
+    console.log('moved up');
   };
   document.getElementById('right-button').onclick = async () => {
     await move(account, manifest, 'right');
+    console.log('moved right');
   };
   document.getElementById('down-button').onclick = async () => {
     await move(account, manifest, 'down');
+    console.log('moved down');
   };
   document.getElementById('left-button').onclick = async () => {
     await move(account, manifest, 'left');
+    console.log('moved left');
   };
   document.getElementById('move-random-button').onclick = async () => {
     await moveRandom(account, manifest);

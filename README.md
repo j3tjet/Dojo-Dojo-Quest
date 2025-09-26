@@ -7,7 +7,7 @@ Este proyecto acompaña el artículo **"Los Pilares de Dojo, creemos un mundo on
 
 ---
 
-## 🚀 Características
+##  Características
 
 - Arquitectura **Entity-Component-System (ECS)** sobre Dojo.  
 - Interfaz web en **HTML + JavaScript** con [Cartridge Controller](https://docs.cartridge.gg/controller/getting-started).  
@@ -17,7 +17,7 @@ Este proyecto acompaña el artículo **"Los Pilares de Dojo, creemos un mundo on
 
 ---
 
-## 📂 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```plaintext
 .
@@ -31,6 +31,7 @@ Este proyecto acompaña el artículo **"Los Pilares de Dojo, creemos un mundo on
 │   └── assets/        # Sprites (personaje, mapa, tesoro)
 ├── manifest_dev.json  # Manifest generado por Dojo
 └── README.md
+```
 
 ## 🛠️ Requisitos
 
@@ -41,7 +42,7 @@ Este proyecto acompaña el artículo **"Los Pilares de Dojo, creemos un mundo on
 
 ---
 
-## ⚡ Instalación y Uso
+##  Instalación y Uso
 
 1. **Clona el repositorio**
    ```bash

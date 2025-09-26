@@ -28,7 +28,7 @@ pub mod actions {
     use core::num::traits::SaturatingSub;
     use dojo::model::ModelStorage;
 
-    pub const INIT_COORD: u32 = 10;
+    pub const INIT_COORD: u32 = 1;
     pub const INIT_REMAINING_MOVES: u8 = 100;
     const VRF_PROVIDER_ADDRESS: felt252 = 0x15f542e25a4ce31481f986888c179b6e57412be340b8095f72f75a328fbb27b;
 
